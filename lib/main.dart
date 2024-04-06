@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_work/screens/onboarding_screen.dart';
+import 'package:quiz_work/screens/question_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +11,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: OnboardingScreen(),
+    return MaterialApp(
+      routes: {
+        '/': (context) => const OnboardingScreen(),
+        '/questions': (context) => const QuestionsScreen(),
+      }
     );
   }
 }

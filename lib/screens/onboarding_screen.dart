@@ -81,6 +81,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 onPressed: () {
                   // Navigate to the quiz screen
+                  Navigator.pushReplacementNamed(context, '/questions');
                 },
                 child: const Text(
                   'Start Quiz',
