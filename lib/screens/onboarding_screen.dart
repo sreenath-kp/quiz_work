@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_work/models/questions.dart';
+import 'package:quiz_work/screens/question_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -79,9 +81,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   // Navigate to the quiz screen
-                  // TODO - Navigate to the quiz screen only if a category is selected
                   if (selectedCategory.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -91,7 +92,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     );
                     return;
                   }
-                  Navigator.pushReplacementNamed(context, '/questions');
+
+                  final response =
+                      await Questions().fetchQuestion(selectedCategory);
+                  if (response != null) {
+                  } else {
+                    ScaffoldMessenger.of(context).clearSnackBars();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Failed to load questions'),
+                      ),
+                    );
+                  }
+
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          QuestionsScreen(questions: response!),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Start Quiz',

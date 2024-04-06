@@ -5,21 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:quiz_work/models/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  final List<Question> questions;
+  const QuestionsScreen({super.key, required this.questions});
   @override
   State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   int currentQuestionIndex = 0;
-  List<Question> quest =
-      questions; // questions from other file ( later we will fetch from API)
+  // questions from other file ( later we will fetch from API)
   List<String> selectedAnswers = [];
   void answerQuestion(String selectedAnswer) {
     selectedAnswers.add(selectedAnswer);
-    // TODO
-    // few bug fixes
-    if (currentQuestionIndex == quest.length - 1) {
+    if (currentQuestionIndex == widget.questions.length - 1) {
       // show the result screen
       return;
     }
@@ -31,7 +29,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = quest[currentQuestionIndex];
+    final currentQuestion = widget.questions[currentQuestionIndex];
     return Scaffold(
       backgroundColor: const Color(0xFFFEDC62),
       body: Center(
