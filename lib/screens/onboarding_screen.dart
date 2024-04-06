@@ -81,6 +81,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 onPressed: () {
                   // Navigate to the quiz screen
+                  // TODO - Navigate to the quiz screen only if a category is selected
+                  if (selectedCategory.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please select a category'),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                    return;
+                  }
                   Navigator.pushReplacementNamed(context, '/questions');
                 },
                 child: const Text(

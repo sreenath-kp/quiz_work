@@ -17,6 +17,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   List<String> selectedAnswers = [];
   void answerQuestion(String selectedAnswer) {
     selectedAnswers.add(selectedAnswer);
+    // TODO
+    // few bug fixes
+    if (currentQuestionIndex == quest.length - 1) {
+      // show the result screen
+      return;
+    }
+
     setState(() {
       currentQuestionIndex++;
     });
