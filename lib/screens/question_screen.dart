@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:quiz_work/models/questions.dart';
+import 'package:quiz_work/screens/result_screen.dart';
 
 class QuestionsScreen extends StatefulWidget {
   final List<Question> questions;
@@ -19,6 +20,16 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     selectedAnswers.add(selectedAnswer);
     if (currentQuestionIndex == widget.questions.length - 1) {
       // show the result screen
+      // TODO
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(
+            questions: widget.questions,
+            selectedAnswers: selectedAnswers,
+          ),
+        ),
+      );
+
       return;
     }
 
