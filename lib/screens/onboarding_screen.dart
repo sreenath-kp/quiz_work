@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
@@ -11,33 +12,83 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: const Color(0xFF4255FF),
+        backgroundColor: const Color(0xFF4255FF),
         body: Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          //  TODO: some icon maybe
-          // some title
-          DropdownMenu(
-              // style the dropdown menu
-              dropdownMenuEntries: const [
-                // dropdown menu items
-                DropdownMenuEntry(value: '1', label: 'category 1'),
-              ],
-              onSelected: (value) {}
-              // onSelected callback
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.question_answer,
+                size: 140,
+                color: Colors.white,
               ),
-          ElevatedButton(
-            // style the button
-            onPressed: () {
-              // navigate to the quiz screen
-            },
-            child: const Text(
-              'Start Quiz',
-            ),
+              const SizedBox(height: 10),
+              const Text(
+                'Quiz away',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(12.0, 40, 12.0, 0),
+                child: ListTile(
+                  leading: Icon(Icons.lightbulb),
+                  title: Text('Choose a category for the questions'),
+                ),
+              ),
+              DropdownMenu(
+                width: 200,
+                trailingIcon: const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.white,
+                ),
+                inputDecorationTheme: const InputDecorationTheme(
+                    fillColor: Color.fromARGB(255, 46, 64, 217), filled: true),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                label: const Text(
+                  'Category',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+                dropdownMenuEntries: const [
+                  DropdownMenuEntry(value: '17', label: 'Nature & Biology'),
+                  DropdownMenuEntry(value: '18', label: 'Computer Science'),
+                  DropdownMenuEntry(value: '19', label: 'Mathemtics'),
+                  DropdownMenuEntry(value: '23', label: 'History'),
+                  DropdownMenuEntry(value: '11', label: 'Films'),
+                ],
+                onSelected: (value) {
+                  setState(() {
+                    selectedCategory = value!;
+                  });
+                },
+              ),
+              const SizedBox(height: 150),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFFCD1F),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+                onPressed: () {
+                  // Navigate to the quiz screen
+                },
+                child: const Text(
+                  'Start Quiz',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }
